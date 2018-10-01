@@ -10,6 +10,5 @@
 |
 */
 Route::group(['namespace' => 'Admin', 'middleware' => 'adminWeb'], function () {
-    //## 메인
-    Route::get('/main', 'MainController@main');
+    Route::get("/main", "MainController@index");                    //메인 페이지
 });

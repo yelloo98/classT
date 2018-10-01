@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['namespace' => 'Api'], function () {
+    //Route::get('/schedule/{id}', 'ApiController@getScheduleData'); //# 강사 스케쥴
 });
