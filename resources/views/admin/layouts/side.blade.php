@@ -8,7 +8,7 @@
                 <img src="/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info" style="padding-bottom: 10px;">
-                {{--<p style="margin-top : 5%; display: inline-block; margin-right: 2px;">{{Auth::guard('admins')->user()->name}}</p>--}}
+                <p style="margin-top : 5%; display: inline-block; margin-right: 2px;">{{Auth::guard('admins')->user()->name}}</p>
                 <input class="btn btn-default btn-sm"  type="button" style="color: black" value="로그아웃" onclick="javascript:location.replace('/admin/logout');">
             </div>
         </div>
@@ -19,9 +19,7 @@
             <li class="{{ (strpos(Request::path(), 'admin/program') !== false) ? 'active' : '' }} treeview">
                 <a href="#">
                     <i class="fa fa-pencil-square-o"></i> <span>교육프로그램 관리</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{Request::is('admin/program') ? 'active' : ''}}"><a href="/admin/program"><i class="fa fa-circle-o"></i> 목록</a></li>

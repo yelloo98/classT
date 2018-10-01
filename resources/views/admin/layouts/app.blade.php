@@ -39,8 +39,8 @@
         <div class="content-wrapper">
             <section class="content-header">
                 <h1>
-                    {{--{{$navMenu}}--}}
-                    {{--<small>{{$navSubMenu}}</small>--}}
+                    {{$navMenu}}
+                    <small>{{$navSubMenu}}</small>
                 </h1>
             </section>
             @yield('content'){{-- 컨텐츠 --}}

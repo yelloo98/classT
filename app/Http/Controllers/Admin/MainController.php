@@ -21,19 +21,14 @@ class MainController extends Controller
 	    $tbData['data_1_1'] = ClassRequest::count();
 	    //# 제안서 미요청건
 	    $tbData['data_1_2'] = ClassRecommend::where('status','=','1')->count();
-	    //$tbData['data_1_2'] = ClassRecommend::select(DB::raw("IF(MAX(class_recommend.status) = 1, 1, 0)as count"))->groupBy('class_recommend.class_request_id')->get()->where('count', '>', 0)->count()
 	    //# 제안서 미수신건
 	    $tbData['data_1_3'] = ClassRecommend::where('status','=','2')->count();
-	    //$tbData['data_1_3'] = ClassRecommend::select(DB::raw("IF(MAX(class_recommend.status) = 2, 1, 0)as count"))->groupBy('class_recommend.class_request_id')->get()->where('count', '>', 0)->count()
 	    //# 제안서 미발송건
 	    $tbData['data_1_4'] = ClassRecommend::where('status','=','3')->count();
-	    //$tbData['data_1_4'] = ClassRecommend::select(DB::raw("IF(MAX(class_recommend.status) = 3, 1, 0)as count"))->groupBy('class_recommend.class_request_id')->get()->where('count', '>', 0)->count()
 	    //# 출강 미 요청건 (프리미엄 | 강의 의뢰)
 	    $tbData['data_2_1'] = ClassRecommend::leftJoin('class_request', 'class_request.id', '=', 'class_recommend.class_request_id')->where('request_type', '=', 'premium')->where('class_recommend.status', '=', '5')->count();
-	    //ClassRecommend::select(DB::raw("IF(MAX(class_recommend.status) = 5, 1, 0)as count"))->leftJoin('class_request', 'class_recommend.class_request_id', '=', 'class_request.id')->where('class_request.request_type', '=', 'premium')->groupBy('class_recommend.class_request_id')->get()->where('count', '>', 0)->count()
 	    //# 출강 미 확정건 (프리미엄 | 출강요청)
 	    $tbData['data_2_2'] = ClassRecommend::leftJoin('class_request', 'class_request.id', '=', 'class_recommend.class_request_id')->where('request_type', '=', 'premium')->where('class_recommend.status', '=', '6')->count();
-        //ClassRecommend::select(DB::raw("IF(MAX(class_recommend.status) = 6, 1, 0)as count"))->leftJoin('class_request', 'class_recommend.class_request_id', '=', 'class_request.id')->where('class_request.request_type', '=', 'premium')->groupBy('class_recommend.class_request_id')->get()->where('count', '>', 0)->count()
 	    //# 정산대기 (강의확정 | 주문ID 없을시)
 	    $tbData['data_2_3'] = ClassRequest::where('request_status','=','c_confirm')->where('order_id','=','')->count();
 	    //# 세금계산서 미발행건 (세금계산서 ID 없을시)
