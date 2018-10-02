@@ -19,5 +19,16 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'adminWeb'], function () {
 
     Route::group(['middleware' => 'admin.auth'], function () { //# 로그인 정보 체크
         Route::get("/main", "MainController@index");                    //메인 페이지
+
+        //controller, model, view
+        Route::group(['prefix' => 'program'], function() { //교육프로그램 관리
+            Route::get('/', "ProgramController@index");
+            Route::get('/detail/{id?}', 'ProgramController@detail');
+            Route::post('/save/{id?}', 'ProgramController@saveDB'); //insert or update or delete
+            Route::get('/list', "ProgramController@getList"); //# 교육프로그램 리스트 요청
+        });
+
+
+
     });
 });
