@@ -1,0 +1,35 @@
+.pagination {
+  float:right;
+}
+
+th, td {
+  text-align : center;
+  vertical-align : middle!important;
+}
+
+table.tableDetail th {
+  background: #eee;
+}
+
+table.tableDetail th, td{
+  text-align : left!important;
+  padding-left: 18px !important;
+}
+
+table.table_fee th {
+  background: #eee;
+}
+
+.text-align-left{
+  text-align : left!important;
+}
+
+table.stat-table th {
+  text-align: center;
+  vertical-align: middle;
+  background: #eee;
+}
+
+table.stat-table td {
+  text-align: center!important;
+}
