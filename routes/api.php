@@ -15,4 +15,5 @@ use Illuminate\Http\Request;
 
 Route::group(['namespace' => 'Api'], function () {
     Route::get('/schedule/{id}', 'ApiController@getScheduleData'); //# 강사 스케쥴
+    Route::get('/recommendTeacherList/{requestId}/{status}', 'ApiController@getRecommendTeacherList'); //# 프리미엄 추천 강사 리스트 [ajax]
 });
