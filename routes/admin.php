@@ -46,6 +46,15 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'adminWeb'], function () {
                 Route::post('/insertRecommendTeacher', 'RequestController@insertRecommendTeacher');         //# 추천강사 등록
             });
         });
+        //# 제안서 관리
+        Route::group(['prefix' => 'proposal'], function() {
+            Route::get('/', 'ProposalController@index');                                    //# 목록
+            Route::get('/detail/{id?}', 'ProposalController@detail');                       //# 상세
+            Route::post('/save', 'ProposalController@saveDB');                              //# 제안서 update
+            Route::get('/list', 'ProposalController@getList');                              //# 제안서 리스트 요청
+            Route::get('/download/{id}', 'ProposalController@fileDownload');                //# 제안서 다운로드
+            Route::get('/ajax/delProposalFile/{id}', 'ProposalController@delProposalFile'); //# 제안서 삭제
+        });
 
     });
 });

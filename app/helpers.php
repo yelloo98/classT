@@ -11,7 +11,7 @@
  * @param $deadline : 요청 마감
  * @param $created_at : 요청 등록일
  * @return 마감일
-**/
+ **/
 function getRequestDeadline($deadline, $created_at) {
     $addDay = date('Y-m-d', strtotime($created_at . " +".$deadline." days")); //등록일에서 요청마감일수 를 더한다
 
@@ -35,7 +35,7 @@ function getRequestDeadline($deadline, $created_at) {
  * @param $addMinute : 더할 값(분)
  * @param $addDate : 더할 날짜
  * @return datetime
-*/
+ */
 function getAddDateTime($date, $startTime = "13:00:00", $addMinute = "0", $addDate = "0") {
     return date('Y-m-d H:i:s', strtotime($date. " ".$startTime . " +".$addMinute." minutes +".$addDate." days"));
 }
@@ -77,7 +77,7 @@ function getAddDateF($date, $format = "Y-m-d", $operator = "+", $addDate = "0", 
  * @param $startDate : 시작일
  * @param $endDate : 종료일
  * @return date_diff
-*/
+ */
 function diffDate($startDate, $endDate) {
     if($startDate == $endDate) {
         return 0;
@@ -91,39 +91,39 @@ function diffDate($startDate, $endDate) {
  * -----------------------------------------------------------------------------------------------------------------
  */
 function getAdminUserInfo($key = "") {
-	$data = \Illuminate\Support\Facades\Auth::guard('admins')->user();
+    $data = \Illuminate\Support\Facades\Auth::guard('admins')->user();
 
-	//# 관리자 정보가 있을 경우
-	if($data != null) {
-		if($key != "") return $data[$key];
-		else return $data;
-	} else {
-		return null;
-	}
+    //# 관리자 정보가 있을 경우
+    if($data != null) {
+        if($key != "") return $data[$key];
+        else return $data;
+    } else {
+        return null;
+    }
 }
 
 /**
  * 강사회원 정보 반환
  * @param $key
  * @return array or value
-**/
+ **/
 function getAuthTeacher($key = "") {
-	$data = \Illuminate\Support\Facades\Auth::guard('teacher')->user();
+    $data = \Illuminate\Support\Facades\Auth::guard('teacher')->user();
 
-	//# 관리자 정보가 있을 경우
-	if($data != null) {
-		if($key != "") return $data[$key];
-		else return $data;
-	} else {
-		return null;
-	}
+    //# 관리자 정보가 있을 경우
+    if($data != null) {
+        if($key != "") return $data[$key];
+        else return $data;
+    } else {
+        return null;
+    }
 }
 
 /**
  * 기업회원 정보 반환
  * @param $key
  * @return array or value
-**/
+ **/
 function getAuthCompany($key = "") {
     $data = \Illuminate\Support\Facades\Auth::guard('company')->user();
 
@@ -146,20 +146,19 @@ function sendPasswordResetMail($userType, $toEmail, $authNumber) {
 
     $subjectStr = ($userType == "company") ? "기업/교육업체" : "강사";
 
-	$data = [
-		"email" => $toEmail,
-		"resetType"=>$userType,
-		"autoNumber"=>$authNumber
-	];
+    $data = [
+        "email" => $toEmail,
+        "resetType"=>$userType,
+        "autoNumber"=>$authNumber
+    ];
 
 
-	//### Send Email
-	Mail::send('web.common.resetProc', $data, function ($mail) use($toEmail, $subjectStr){
-		$mail->from(env('MAIL_USERNAME'));
-		$mail->to($toEmail);
-		$mail->subject(sprintf('[%s] 클래스이음 비밀번호 초기화', $subjectStr));
-
-	});
+    //### Send Email
+    Mail::send('web.common.resetProc', $data, function ($mail) use($toEmail, $subjectStr) {
+        $mail->from(env('MAIL_USERNAME'));
+        $mail->to($toEmail);
+        $mail->subject(sprintf('[%s] 클래스이음 비밀번호 초기화', $subjectStr));
+    });
 }
 
 /**
@@ -167,7 +166,7 @@ function sendPasswordResetMail($userType, $toEmail, $authNumber) {
  * @param $fileName
  * @param $fileType
  * @return path
-*/
+ */
 function getFullS3Path($fileName, $fileType) {
     return env('AWS_URL').env('AWS_'.$fileType.'_PATH').$fileName;
 }
@@ -184,16 +183,16 @@ function getFullS3Path($fileName, $fileType) {
  * @return userType
  */
 function isUserType() {
-	$vCompanyData = \Illuminate\Support\Facades\Auth::guard('company')->user();
-	$vTeacherData = \Illuminate\Support\Facades\Auth::guard('teacher')->user();
+    $vCompanyData = \Illuminate\Support\Facades\Auth::guard('company')->user();
+    $vTeacherData = \Illuminate\Support\Facades\Auth::guard('teacher')->user();
 
-	if($vCompanyData) {
-		return "company";
-	} else if($vTeacherData) {
-		return "teacher";
-	} else {
-		return "guest";
-	}
+    if($vCompanyData) {
+        return "company";
+    } else if($vTeacherData) {
+        return "teacher";
+    } else {
+        return "guest";
+    }
 }
 
 /**
@@ -218,7 +217,7 @@ function convKeyArray($data, $key) {
  * 배열 값 비교
  * @param : 배열값
  * @return array
-*/
+ */
 function compareAryValue($aryValue) {
     if(isset($aryValue)) {
         if(is_array($aryValue)) {
