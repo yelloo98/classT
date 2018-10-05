@@ -14,5 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['namespace' => 'Api'], function () {
-    //Route::get('/schedule/{id}', 'ApiController@getScheduleData'); //# 강사 스케쥴
+    Route::get('/schedule/{id}', 'ApiController@getScheduleData'); //# 강사 스케쥴
 });

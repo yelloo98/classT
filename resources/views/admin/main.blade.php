@@ -107,15 +107,15 @@
             //# 켈린더 init
             CommCalendar.init("#calendar", null);
 
-//            //# 스케쥴 데이터 조회
-//            $.ajax({
-//                url: '/api/schedule/0',
-//                type: 'GET',
-//                success: function(result){
-//                    console.log(result);
-//                    CommCalendar.setData("#calendar", result, false);
-//                }
-//            });
+            //# 스케쥴 데이터 조회
+            $.ajax({
+                url: '/api/schedule/0',
+                type: 'GET',
+                success: function(result){
+                    console.log(result);
+                    CommCalendar.setData("#calendar", result, false);
+                }
+            });
 
         });
     </script>
