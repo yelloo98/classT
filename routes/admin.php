@@ -55,6 +55,17 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'adminWeb'], function () {
             Route::get('/download/{id}', 'ProposalController@fileDownload');                //# 제안서 다운로드
             Route::get('/ajax/delProposalFile/{id}', 'ProposalController@delProposalFile'); //# 제안서 삭제
         });
+        //# 협력사 관리
+        Route::group(['prefix' => 'partner'], function() {
+            Route::match(['get', 'post'], '/', 'PartnerController@index');                  //# 목록
+            Route::get('/detail/{id?}', 'PartnerController@detail');                        //# 상세
+            Route::group(['prefix' => 'ajax'], function(){
+                Route::get('/delPartner/{id}', 'PartnerController@deleteDB');               //# delete
+                Route::post('/savePartner', 'PartnerController@saveDB');                    //# save(insert or update)
+                Route::get('/getPartner/{id}', 'PartnerController@selectPartnerOne');       //# select
+            });
+            Route::get('/list', 'PartnerController@getList');                               //# 협력사 명단 요청
+        });
 
     });
 });
