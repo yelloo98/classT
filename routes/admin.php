@@ -160,6 +160,20 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'adminWeb'], function () {
                 Route::get('/ajax/contactRequest/{teacherId}/{requestId}', 'MemberController@contactRequest');  //# 강사-프리미엄 의뢰 연결
             });
         });
-
+        //# 정산
+        Route::group(['prefix' => 'calculate'], function() {
+            //# 기업 회원
+            Route::group(['prefix' => 'company'], function() {
+                Route::get('/', 'CalculateController@companyList');                 //# 목록
+                Route::get('/detail/{id}', 'CalculateController@companyDetail');    //# 상세화면
+                Route::get('/list', 'CalculateController@getCompanyList');
+            });
+            //# 강사 회원
+            Route::group(['prefix' => 'teacher'], function() {
+                Route::get('/', 'CalculateController@teacherList');                 //# 목록
+                Route::get('/detail/{id}', 'CalculateController@teacherDetail');    //# 상세화면
+                Route::get('/list', 'CalculateController@getTeacherList');
+            });
+        });
     });
 });
