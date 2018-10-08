@@ -85,5 +85,30 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'adminWeb'], function () {
             Route::post('/save', 'NoticeController@saveDB');                                //# insert or update
             Route::get('/list', 'NoticeController@getList');                                //# 공지사항 목록 요청
         });
+        //# 강의 후기
+        Route::group(['prefix' => 'review'], function() {
+            Route::group(['prefix' => 'student'], function() { //# 수강생평가
+                Route::get('/', 'ReviewController@studentList');
+                Route::get('/list', 'ReviewController@getEvaluateUserList'); //# 수강생평가 목록 요청
+                Route::get('/detail/{id}', 'ReviewController@studentDetail'); //# 수강생 평가 상세 보기
+            });
+            Route::group(['prefix' => 'company'], function() { //# 기업평가
+                Route::get('/', 'ReviewController@companyList');  //# 리스트
+                Route::get('/list', 'ReviewController@getEvaluateCompanyList'); //# 기업평가 목록 요청
+                Route::get('/detail/{id}', 'ReviewController@companyDetail'); //# 상세보기
+            });
+        });
+        //# 평가 항목
+        Route::group(['prefix' => 'question'], function() {
+            Route::get('/', 'QuestionController@index'); //관리 페이지로 이동
+            Route::get('/basicList', 'QuestionController@getBasicList'); //기본 평가 목록 요청
+            Route::get('/oneList', 'QuestionController@getOneList'); //일회성 평가 목록 요청
+
+            Route::group(['prefix' => 'ajax'], function() {
+                Route::get('/delQuestion/{id}', 'QuestionController@deleteDB'); //평가항목 삭제
+                Route::post('/saveQuestion', 'QuestionController@saveDB'); //평가항목 insert or update
+                Route::get('/getQuestion/{id}', 'QuestionController@selectQuestionOne'); //평가항목 1 row 요청
+            });
+        });
     });
 });
