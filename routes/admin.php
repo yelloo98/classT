@@ -78,6 +78,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'adminWeb'], function () {
                 Route::get('/getMidCate/{largeCate}', 'LectureController@getMidCateList');  //# 중분류 목록
             });
         });
-
+        //# 공지사항
+        Route::group(['prefix' => 'notice'], function() {
+            Route::match(['get', 'post'], '/', 'NoticeController@index');                   //# 목록
+            Route::get('/detail/{id?}', 'NoticeController@detail');                         //# 상세
+            Route::post('/save', 'NoticeController@saveDB');                                //# insert or update
+            Route::get('/list', 'NoticeController@getList');                                //# 공지사항 목록 요청
+        });
     });
 });
