@@ -116,5 +116,23 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'adminWeb'], function () {
             Route::post('/save', 'QnaController@updateDB');                             //# 답변 저장
             Route::get('/list', 'QnaController@getList');                               //# datatable 목록 요청
         });
+        //# 통계
+        Route::group(['prefix' => 'stats'], function() {
+            //# 기업
+            Route::group(['prefix' => 'company'], function() {
+                Route::get('/', 'StatsController@companyStats');
+                Route::get('/list', 'StatsController@companyStatList'); //#기업 통계 데이터 요청
+            });
+            //# 강사
+            Route::group(['prefix' => 'teacher'], function() {
+                Route::get('/', 'StatsController@teacherStats');
+                Route::get('/list', 'StatsController@teacherStatList'); //#강사 통계 데이터 요청
+            });
+            //# 클래스이음
+            Route::group(['prefix' => 'classeum'], function (){
+                Route::get("/", "StatsController@classeumStats");
+                Route::get("/list", "StatsController@classeumStatList"); //#클래스이음 통계 데이터 요청
+            });
+        });
     });
 });
