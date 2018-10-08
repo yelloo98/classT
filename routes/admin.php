@@ -66,6 +66,18 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'adminWeb'], function () {
             });
             Route::get('/list', 'PartnerController@getList');                               //# 협력사 명단 요청
         });
+        //# 강의 분야
+        Route::group(['prefix' => 'lecture'], function() {
+            Route::get("/", 'LectureController@index');                                     //# 강의분야 목록
+            Route::get("/list", "LectureController@getList");                               //# 강의분야 목록 요청
+            Route::group(['prefix' => 'ajax'], function(){
+                Route::get('/dellLecture/{id}', 'LectureController@deleteDB');              //# delete
+                Route::post('/saveLecture', 'LectureController@saveDB');                    //# save(insert or update)
+                Route::get('/getLecture/{id}', 'LectureController@selectLectureOne');       //# select one
+                Route::get('/getLargeCate', 'LectureController@getLargeCateList');          //# 대분류 목록
+                Route::get('/getMidCate/{largeCate}', 'LectureController@getMidCateList');  //# 중분류 목록
+            });
+        });
 
     });
 });
