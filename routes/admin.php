@@ -134,5 +134,32 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'adminWeb'], function () {
                 Route::get("/list", "StatsController@classeumStatList"); //#클래스이음 통계 데이터 요청
             });
         });
+        //# 회원 관리
+        Route::group(['prefix' => 'member'], function() {
+            //# 기업 회원
+            Route::group(['prefix' => 'company'], function() {
+                Route::match(['get', 'post'],'/', 'MemberController@companyUserList');  //# 기업회원 리스트
+                Route::get('/detail/{id?}', 'MemberController@companyUserDetail');      //# 기원회원 상세보기
+                Route::post('/save', 'MemberController@companyUserUpdate');             //# update
+                Route::get('/list', 'MemberController@getCompanyUserList');             //# 기업회원 목록 요청
+                Route::get("/class/list/", 'MemberController@getCompanyClassList');     //# 기업회원 강의현황 목록 요청
+                Route::get("/request/list", 'MemberController@getCompanyRequestList');  //# 기업회원 프리미엄 의뢰 현황 목록 요청
+                Route::get("/order/list", 'MemberController@getCompanyOrderList');      //# 기업회원 정산 현황 목록 요청
+            });
+            //# 강사 회원
+            Route::group(['prefix' => 'teacher'], function() {
+                Route::match(['get', 'post'],'/', 'MemberController@teacherUserList');  //# 강사회원 리스트
+                Route::get('/detail/{id?}', 'MemberController@teacherUserDetail');      //# 강사회원 상세보기
+                Route::post('/update', 'MemberController@teacherUserUpdate');           //# update
+                Route::get('/delete/{id}', 'MemberController@teacherUserDelete');       //# delete
+                Route::get('/list', 'MemberController@getTeacherUserList');             //# 강사회원 목록 요청
+                Route::get("/class/list/", 'MemberController@getTeacherClassList');     //# 강사회원 강의현황 목록 요청
+                Route::get("/request/list", 'MemberController@getTeacherRequestList');  //# 강사회원 프리미엄 의뢰 현황 목록 요청
+                Route::get("/order/list", 'MemberController@getTeacherOrderList');      //# 강사회원 정산 현황 목록 요청
+                Route::get('/contactPremium/{id}', 'MemberController@getPremiumList');  //# 프리미엄 의뢰 목록 요청
+                Route::get('/ajax/contactRequest/{teacherId}/{requestId}', 'MemberController@contactRequest');  //# 강사-프리미엄 의뢰 연결
+            });
+        });
+
     });
 });
